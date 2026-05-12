@@ -104,7 +104,7 @@ Edit `config/dash-arrange.php` to customize:
 
 ## Requirements
 
-- PHP ^8.4
+- PHP ^8.2
 - Filament ^4.0
 - Laravel ^12.0
 
