@@ -1,6 +1,6 @@
 {
     "name": "shreejan/dash-arrange",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "description": "A Filament plugin for customizable dashboard widgets with drag & drop functionality",
     "type": "library",
     "license": "MIT",
@@ -11,10 +11,10 @@
         }
     ],
     "require": {
-        "php": "^8.4",
-        "filament/filament": "^4.0",
-        "illuminate/support": "^12.0",
-        "illuminate/database": "^12.0"
+        "php": "^8.2",
+        "filament/filament": "^4.0|^5.0",
+        "illuminate/support": "^12.0|^13.0",
+        "illuminate/database": "^12.0|^13.0"
     },
     "autoload": {
         "psr-4": {
