@@ -15,6 +15,16 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Dashboard Model
+    |--------------------------------------------------------------------------
+    |
+    | The model class to use for storing dashboard arrangement data.
+    |
+    */
+    'model' => \ArragneFramework\DashArrange\Models\DashboardArrangement::class,
+
+    /*
+    |--------------------------------------------------------------------------
     | User ID Resolver
     |--------------------------------------------------------------------------
     |
@@ -82,5 +92,4 @@ return [
     'customize_dashboard_title' => 'Customize My Dashboard',
     'customize_dashboard_button_color' => 'primary',
 ];
-
 
