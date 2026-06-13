@@ -262,8 +262,10 @@ trait HasDashArrange
      */
     private function updateVisibleWidgets(array $sortedWidgets, int $userId): void
     {
+        $modelClass = $this->getModelClass();
+
         foreach ($sortedWidgets as $index => $widgetName) {
-            UserWidgetPreference::updateOrCreate(
+            $modelClass::updateOrCreate(
                 [
                     'user_id' => $userId,
                     'widget_name' => $widgetName,
@@ -284,13 +286,14 @@ trait HasDashArrange
      */
     private function hideRemovedWidgets(array $sortedWidgets, int $userId): void
     {
+        $modelClass = $this->getModelClass();
         $removedWidgetNames = $this->getRemovedWidgetNames($sortedWidgets);
 
         if (empty($removedWidgetNames)) {
             return;
         }
 
-        UserWidgetPreference::where('user_id', $userId)
+        $modelClass::where('user_id', $userId)
             ->whereIn('widget_name', $removedWidgetNames)
             ->update(['show_widget' => false]);
     }
@@ -326,6 +329,16 @@ trait HasDashArrange
         $resolver = config('dash-arrange.user_id_resolver', fn () => Auth::id());
 
         return $resolver();
+    }
+
+    /**
+     * Get the model class from config.
+     *
+     * @return string
+     */
+    private function getModelClass(): string
+    {
+        return config('dash-arrange.model', UserWidgetPreference::class);
     }
 
     /**
@@ -419,11 +432,13 @@ trait HasDashArrange
      */
     private function getUserPreferences(int $userId): array
     {
-        $allPreferences = UserWidgetPreference::where('user_id', $userId)
+        $modelClass = $this->getModelClass();
+
+        $allPreferences = $modelClass::where('user_id', $userId)
             ->pluck('show_widget', 'widget_name')
             ->toArray();
 
-        $visiblePreferences = UserWidgetPreference::where('user_id', $userId)
+        $visiblePreferences = $modelClass::where('user_id', $userId)
             ->where('show_widget', true)
             ->orderBy('order')
             ->pluck('order', 'widget_name')
@@ -497,7 +512,8 @@ trait HasDashArrange
             return false;
         }
 
-        $preference = UserWidgetPreference::where('user_id', $userId)
+        $modelClass = $this->getModelClass();
+        $preference = $modelClass::where('user_id', $userId)
             ->where('widget_name', get_class($resolvedWidget))
             ->first();
 
@@ -597,5 +613,4 @@ trait HasDashArrange
         );
     }
 }
-
 
