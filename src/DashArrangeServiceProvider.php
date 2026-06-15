@@ -25,6 +25,7 @@ class DashArrangeServiceProvider extends PackageServiceProvider
             ->name('dash-arrange')
             ->hasConfigFile('dash-arrange')
             ->hasViews('dash-arrange')
+            ->hasTranslations()
             ->hasMigrations([
                 '2025_01_09_000000_create_user_widget_preferences_table',
             ])
@@ -53,4 +54,3 @@ class DashArrangeServiceProvider extends PackageServiceProvider
         ], package: 'shreejan/dash-arrange');
     }
 }
-
